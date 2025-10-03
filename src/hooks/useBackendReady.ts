@@ -14,14 +14,10 @@ export const useBackendReady = () => {
   const checkBackendStatus = async () => {
     try {
       setIsChecking(true);
-      
-      // TODO: Replace with actual backend health check
-      // const response = await fetch('/api/health');
-      // setIsBackendReady(response.ok);
-      
-      // For now, we're always in "mock" mode
-      setIsBackendReady(false);
-      
+
+      // Backend is ready since we're using Supabase
+      setIsBackendReady(true);
+
     } catch (err) {
       setError('Unable to connect to backend');
       setIsBackendReady(false);
