@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
-import { ArrowRight, Sparkles, Users, Briefcase, TrendingUp, Star, Zap, CheckCircle2, Rocket, Heart, Award } from 'lucide-react';
+import { ArrowRight, Sparkles, Users, Briefcase, TrendingUp, Star, Zap, CircleCheck as CheckCircle2, Rocket, Heart, Award } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 export const Landing = () => {
