@@ -38,38 +38,50 @@ const ProtectedRoute = ({ children, requireRecruiter = false }: { children: Reac
   return <>{children}</>;
 };
 
-const App = () => (
-  <QueryClientProvider client={queryClient}>
-    <TooltipProvider>
-      <Toaster />
-      <Sonner />
-      <BrowserRouter>
-        <AuthProvider>
-          <Navigation />
-          <Routes>
-            <Route path="/" element={<Landing />} />
-            <Route path="/auth" element={<Auth />} />
-            <Route path="/recruiter-auth" element={<RecruiterAuth />} />
-            <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
-            <Route path="/recruiter-dashboard" element={<ProtectedRoute><RecruiterDashboard /></ProtectedRoute>} />
-            <Route path="/jobs" element={<JobListings />} />
-            
-            <Route path="/profile" element={<Navigate to="/profile/view" />} />
-            <Route path="/profile/complete" element={<ProtectedRoute><ProfileCompletionFlow /></ProtectedRoute>} />
-            <Route path="/profile/personal" element={<ProtectedRoute><PersonalProfileFlow /></ProtectedRoute>} />
-            <Route path="/profile/professional" element={<ProtectedRoute><ProfessionalProfileFlow /></ProtectedRoute>} />
-            <Route path="/profile/view" element={<ProtectedRoute><PublicProfileView /></ProtectedRoute>} />
-            <Route path="/messages" element={<ProtectedRoute><Messages /></ProtectedRoute>} />
-            <Route path="/applications" element={<ProtectedRoute><Applications /></ProtectedRoute>} />
-            <Route path="/settings" element={<ProtectedRoute><Settings /></ProtectedRoute>} />
-            <Route path="/company-setup" element={<ProtectedRoute><CompanyProfileSetup /></ProtectedRoute>} />
-            <Route path="/talent-pool" element={<ProtectedRoute><TalentPool /></ProtectedRoute>} />
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-        </AuthProvider>
-      </BrowserRouter>
-    </TooltipProvider>
-  </QueryClientProvider>
-);
+const App = () => {
+  try {
+    return (
+      <QueryClientProvider client={queryClient}>
+        <TooltipProvider>
+          <Toaster />
+          <Sonner />
+          <BrowserRouter>
+            <AuthProvider>
+              <Navigation />
+              <Routes>
+                <Route path="/" element={<Landing />} />
+                <Route path="/auth" element={<Auth />} />
+                <Route path="/recruiter-auth" element={<RecruiterAuth />} />
+                <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
+                <Route path="/recruiter-dashboard" element={<ProtectedRoute><RecruiterDashboard /></ProtectedRoute>} />
+                <Route path="/jobs" element={<JobListings />} />
+
+                <Route path="/profile" element={<Navigate to="/profile/view" />} />
+                <Route path="/profile/complete" element={<ProtectedRoute><ProfileCompletionFlow /></ProtectedRoute>} />
+                <Route path="/profile/personal" element={<ProtectedRoute><PersonalProfileFlow /></ProtectedRoute>} />
+                <Route path="/profile/professional" element={<ProtectedRoute><ProfessionalProfileFlow /></ProtectedRoute>} />
+                <Route path="/profile/view" element={<ProtectedRoute><PublicProfileView /></ProtectedRoute>} />
+                <Route path="/messages" element={<ProtectedRoute><Messages /></ProtectedRoute>} />
+                <Route path="/applications" element={<ProtectedRoute><Applications /></ProtectedRoute>} />
+                <Route path="/settings" element={<ProtectedRoute><Settings /></ProtectedRoute>} />
+                <Route path="/company-setup" element={<ProtectedRoute><CompanyProfileSetup /></ProtectedRoute>} />
+                <Route path="/talent-pool" element={<ProtectedRoute><TalentPool /></ProtectedRoute>} />
+                <Route path="*" element={<NotFound />} />
+              </Routes>
+            </AuthProvider>
+          </BrowserRouter>
+        </TooltipProvider>
+      </QueryClientProvider>
+    );
+  } catch (error) {
+    console.error('App initialization error:', error);
+    return (
+      <div style={{ padding: '20px', textAlign: 'center', color: 'white' }}>
+        <h1>Unable to load application</h1>
+        <p>Please check your environment configuration</p>
+      </div>
+    );
+  }
+};
 
 export default App;
